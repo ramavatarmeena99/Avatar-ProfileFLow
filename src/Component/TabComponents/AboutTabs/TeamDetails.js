@@ -19,6 +19,7 @@ style={{
   // borderTopRightRadius:"5px",
 }}
 >
+  <h1>TEST</h1>
     <IgnDetailth>Game</IgnDetailth>
     <IgnDetailth>IGN</IgnDetailth>
     <IgnDetailth>PLAYER IGN</IgnDetailth>
