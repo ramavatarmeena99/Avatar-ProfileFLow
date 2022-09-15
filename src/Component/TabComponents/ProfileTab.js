@@ -36,7 +36,7 @@ export default function ProfileTab() {
         value={value}
         onChange={handleChange}
         indicatorColor="primary"
-        textColor="white"
+        textColor="inherit"
         centered
       >
         <Tab label="ABOUT " />

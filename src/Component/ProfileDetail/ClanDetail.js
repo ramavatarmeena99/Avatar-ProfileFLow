@@ -6,7 +6,7 @@ import Style from "./index.module.css"
 export default function ClanDetail() {
   return (
     <div className={Style.forClan}>
-    <div className={Style.forImg}>
+    <div className={Style.forClanImg}>
     <div className={Style.divforImag}></div>
 
     </div>

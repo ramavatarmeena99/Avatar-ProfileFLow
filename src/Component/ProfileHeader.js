@@ -19,10 +19,10 @@ export default function ProfileHeader() {
         <BiArrowBack onClick={backButton} />
       </BackButton>
       <p>Profile</p>
-      <BackButton>
+
       <SimpleMenu/>
 
-      </BackButton>
+
     
     </ProfileTab>
   );
@@ -40,9 +40,10 @@ const ProfileTab = styled.div`
   padding: 0px 10px;
   background-color: #272727;
 `;
-const BackButton = styled.div`
+const BackButton = styled.p`
   font-size: 20px;
 `;
+
 
 
 
@@ -58,15 +59,24 @@ export  function SimpleMenu() {
   };
 
   const handleClose = () => {
-    Navigate("/editprofile")
 
     setAnchorEl(null);
 
   };
 
+  const handleRedirect = () => {
+    Navigate("/editprofile/398478")
+
+    handleClose()
+
+  }
+
   return (
-    <div>
-      <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+    <>
+      <Button style={{
+        color:"white",
+        fontSize:"20px",
+      }} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
         <BiDotsVerticalRounded/>
       </Button>
       <Menu
@@ -75,11 +85,14 @@ export  function SimpleMenu() {
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
+        style={{width:"auto",
+      backgroundColor:"rgba(0,0,0,0.7)",
+      }}
       >
-        <MenuItem onClick={handleClose}>Edit Profile</MenuItem>
+        <MenuItem onClick={handleRedirect}>Edit Profile</MenuItem>
         <MenuItem onClick={handleClose}>Share Profile</MenuItem>
-        <MenuItem onClick={handleClose}>Blocked Users</MenuItem>
+        {/* <MenuItem onClick={handleClose}>Blocked Users</MenuItem> */}
       </Menu>
-    </div>
+    </>
   );
 }

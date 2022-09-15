@@ -26,7 +26,15 @@ border-radius: 50%;
 background-color: green;
 margin-right: 10px;
 }
+.forClanImg{
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-left: 10px;
 
+}
 .forImg{
     
     display: flex;
@@ -107,7 +115,6 @@ justify-content: center;
     height: 100%;
     display: flex;
     flex-direction: column;
-
     align-items: center;
     justify-content: center;
 }
@@ -153,6 +160,8 @@ display: flex;
 flex-direction: column;
 align-items: flex-start;
 justify-content: center;
+padding-left: 10px;
+
 
 }
 .clanTitle{
@@ -174,7 +183,7 @@ h1{
 .forIcons{
     display: flex;
     flex-direction: row;
-    padding-left: 10px;
+    margin-left: -13px;
     padding-top: 10px;
     padding-bottom: 10px;
 

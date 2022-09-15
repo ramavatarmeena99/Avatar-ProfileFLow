@@ -13,7 +13,14 @@ import { BiShareAlt } from "react-icons/bi";
 export default function ProfileDetails() {
   const Navigate = useNavigate()
   const followers = ()=>{
-    Navigate("/followersorfollowing")
+    Navigate("/followersorfollowing/followers",{
+      state:{
+        id:0
+      }
+    })
+  }
+  const following = ()=>{
+    Navigate("/followersorfollowing/following")
   }
   return (
     <div className={Style.profileDetails}>
@@ -27,7 +34,7 @@ export default function ProfileDetails() {
           </div>
           <div className={Style.rightBottom}>
             <h1 onClick={followers}> 01 Followers</h1>
-            <h1>22 Following</h1>
+            <h1 onClick={following}>22 Following</h1>
 
           </div>
         </div>
