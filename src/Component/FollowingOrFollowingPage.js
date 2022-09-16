@@ -2,39 +2,44 @@ import React from "react";
 import styled from "styled-components";
 
 export default function FollowersOrFollowingPage() {
-    // console.log(props)
+
   return (
     <div>
       {Array(20)
         .fill(null)
-        .map((i, index) => {
+        .map(() => {
           return (
-            <div
-              style={{
-                color: "red",
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "flex-start",
-                marginTop: "10px",
-                marginLeft: "10px",
-              }}
+            <ForFollowersOrFollowing
+             
             >
-              <div
-                style={{
-                  width: "40px",
-                  height: "40px",
-                  borderRadius: "50%",
-                  backgroundColor: "red",
-                }}
-              ></div>
+              <ForFollowersOrFollowingImage
+               
+              ></ForFollowersOrFollowingImage>
 
-              <p style={{ color: "red", paddingLeft: "10px" }}>
+              <p style={{ color: "white", paddingLeft: "10px" }}>
                 RAMAVATAR MEENA
               </p>
-            </div>
+            </ForFollowersOrFollowing>
           );
         })}
     </div>
   );
 }
+
+
+const ForFollowersOrFollowing = styled.div`
+color: red;
+display:flex;
+flex-direction: row;
+align-items:center;
+justify-content: flex-start;
+margin-top: 10px;
+margin-left: 10px;
+`;
+
+const ForFollowersOrFollowingImage = styled.div`
+width: 40px;
+height: 40px;
+border-radius: 50%;
+background-color: red;
+`;

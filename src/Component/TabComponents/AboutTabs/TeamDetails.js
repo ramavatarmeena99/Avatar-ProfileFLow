@@ -9,51 +9,37 @@ export default function TeamDetails() {
       <IGN>
         <IGNDetailsTable>
           <tbody />
-          <tr
-            style={{
-              width: "100%",
-              height: "40px",
-              display: "flex",
-              flexDirection: "row",
-            }}
+          <TeamPlayDetailsInTr
+           
           >
-            <IgnDetailth>Game</IgnDetailth>
-            <IgnDetailth>IGN</IgnDetailth>
-            <IgnDetailth>PLAYER IGN</IgnDetailth>
-          </tr>
+            <TeamDetailsInTh>Game</TeamDetailsInTh>
+            <TeamDetailsInTh>IGN</TeamDetailsInTh>
+            <TeamDetailsInTh>PLAYER IGN</TeamDetailsInTh>
+          </TeamPlayDetailsInTr>
           {teamData.map((item, index) => {
             return (
-              <tr
+              <TeamDetailsInTr
                 key={index}
                 style={{
-                  width: "100%",
-                  height: "auto",
-                  display: "flex",
-                  flexDirection: "row",
                   borderBottom:
                     index + 1 === teamData.length ? "none" : "1px solid red",
                 }}
               >
-                <IGNDetailsTd>{item.game}</IGNDetailsTd>
-                <IGNDetailsTd>{item.teamName}</IGNDetailsTd>
-                <IGNDetailsTd>
+                <TeamDetailsForTd>{item.game}</TeamDetailsForTd>
+                <TeamDetailsForTd>{item.teamName}</TeamDetailsForTd>
+                <TeamDetailsForTd>
                   {item.playerIGN.map((e, ind) => {
                     return (
-                      <div
+                      <TeamDetailsForUserName
                         key={ind}
-                        style={{
-                          width: "100%",
-                          height: "auto",
-                          display: "flex",
-                          flexDirection: "column",
-                        }}
+                       
                       >
                         <PlayerIGNNAme>{e.nameA}</PlayerIGNNAme>
-                      </div>
+                      </TeamDetailsForUserName>
                     );
                   })}
-                </IGNDetailsTd>
-              </tr>
+                </TeamDetailsForTd>
+              </TeamDetailsInTr>
             );
           })}
           <tbody />
@@ -76,32 +62,61 @@ const IGNDetailsTable = styled.table`
   background-color: #161616;
   border-radius: 5px;
 `;
-const IGNDetailsTd = styled.td`
-  width: 100%;
+const TeamDetailsForTd = styled.td`
+  flex: 1;
   height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  color: white;
-  padding: 10px 0px;
-  // border-bottom:1px solid red;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  color: #FBFBFB;
+  text-align: left;
+  padding:5px 0px;
 `;
-const IgnDetailth = styled.th`
+const TeamDetailsInTh = styled.th`
   flex: 1;
   height: auto;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  color: white;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  color: #959595;
   text-align: left;
   background-color: #272727;
 `;
+
+const TeamDetailsInTr = styled.tr`
+width: 100%;
+height:auto;
+display: flex;
+flex-direction:row;
+`;
+const TeamPlayDetailsInTr = styled.tr`
+width: 100%;
+height:40px;
+display: flex;
+flex-direction:row;
+`;
 const TeamDetailsTitle = styled.h1`
+font-size: 16px;
+line-height: 19px;
   padding: 10px 10px;
 `;
 
 const PlayerIGNNAme = styled.p`
   text-align: center;
+  padding:2px;
+`;
+
+const TeamDetailsForUserName = styled.div`
+width: 100%;
+height: auto;
+display:flex;
+flex-direction:column;
 `;

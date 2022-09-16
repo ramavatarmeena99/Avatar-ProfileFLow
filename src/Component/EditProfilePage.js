@@ -3,34 +3,20 @@ import ProfileHeader from "./ProfileHeader";
 import styled from "styled-components";
 export default function EditProfilePage() {
   return (
-    <div>
+    <ForEditProfilePage>
       <ProfileHeader />
-      <div
-        style={{
-          width: "100%",
-          height: "20vh",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
+      <ForEditProfileImage
+       
       >
-        <div
-          style={{
-            width: "100px",
-            height: "100px",
-            borderRadius: "50%",
-            backgroundColor: "red",
-          }}
-        ></div>
-        <p
-          style={{
-            color: "#3389E9",
-          }}
+        <ForEditImage
+      
+        ></ForEditImage>
+        <ForEditProfileTitle
+         
         >
           Upload Profile Picture
-        </p>
-      </div>
+        </ForEditProfileTitle>
+      </ForEditProfileImage>
       <ForUserDetailsEdit>
         <UserName>USERNAME</UserName>
         <UserNameInput type="text" placeholder="Enter UserName"></UserNameInput>
@@ -80,13 +66,21 @@ export default function EditProfilePage() {
       </ForUserDetailsEdit>
   
 
-    </div>
+    </ForEditProfilePage>
   );
 }
 
+const ForEditProfilePage = styled.p`
+width: 100%;
+height: auto;
+padding-bottom:20px;
+`;
+
 const UserName = styled.p`
-  font-size: 14px;
-  color: white;
+font-weight: 400;
+font-size: 14px;
+line-height: 150%;
+color: #CBCACA;
   padding: 5px 0px;
 `;
 const ForUserDetailsEdit = styled.div`
@@ -106,8 +100,10 @@ const UserNameInput = styled.input`
   border: none;
   outline: none;
   background-color: #161616;
-  color: white;
+  font-weight: 400;
   font-size: 15px;
+  line-height: 18px;
+  color: #FBFBFB;
   padding-left: 10px;
 `;
 const UserNameTextArea = styled.textarea`
@@ -117,8 +113,10 @@ const UserNameTextArea = styled.textarea`
   border: none;
   outline: none;
   background-color: #161616;
-  color: white;
+  font-weight: 400;
   font-size: 15px;
+  line-height: 18px;
+  color: #FBFBFB;
   padding-left: 10px;
 `;
 const SocialMediaLink = styled.div`
@@ -128,7 +126,7 @@ const SocialMediaLink = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-
+border-radius:5px;
 
   padding: 5px 08px;
   background-color:#161616;
@@ -143,4 +141,25 @@ const YoutubeLink = styled.input`
   color: white;
   font-size: 15px;
   padding-left: 10px;
+`;
+const ForEditProfileImage = styled.div`
+width:100%;
+height:20vh;
+display:flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+`;
+const ForEditImage = styled.div`
+width:100px;
+height:100px;
+border-radius: 50%;
+background-color:red;
+`;
+const ForEditProfileTitle = styled.p`
+color: #3389E9;
+font-weight: 400;
+font-size: 14px;
+line-height: 17px;
+padding-top:10px;
 `;

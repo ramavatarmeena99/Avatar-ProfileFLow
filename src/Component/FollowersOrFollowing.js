@@ -42,7 +42,7 @@ export default function FollowersOrFollowing(props) {
           value={value}
           onChange={handleChange}
           indicatorColor="primary"
-          textColor="white"
+          textColor="inherit"
           centered
         >
           <Tab label="FOLLOWERS " />
