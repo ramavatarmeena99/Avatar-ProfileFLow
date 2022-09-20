@@ -4,8 +4,10 @@ import styled from "styled-components";
 import { api2 } from "../utils/handler";
 
 export default function FollowersOrFollowingPage() {
-const [allUserFollowers, setAllUserFollowers] = useState()
-  const {id, type } = useParams();
+  const [allUserFollowersOrFollowing, setAllUserFollowersOrFollowing] =
+    useState([]);
+
+  const { id, type } = useParams();
 
   const getAllUsersForFollowers = async () => {
     let endpoint = `api/v1/esport/followers?user_id=${id}&flag=${type}`;
@@ -14,26 +16,34 @@ const [allUserFollowers, setAllUserFollowers] = useState()
     console.log(res.data);
 
     if (res.data.success) {
-      setAllUserFollowers(res.data.results);
+      if (type === "followers") {
+        setAllUserFollowersOrFollowing(res.data.results.followers.docs);
+      } else {
+        setAllUserFollowersOrFollowing(res.data.results.following.docs);
+      }
     }
   };
 
   useEffect(() => {
     getAllUsersForFollowers();
-
   }, []);
 
   return (
     <div>
-      {Array(20)
-        .fill(null)
-        .map(() => {
+      {allUserFollowersOrFollowing?.length > 0 &&
+        allUserFollowersOrFollowing.map((item, index) => {
+          const userDetails =
+            type === "followers"
+              ? item.followed_by_details
+              : item.following_users_details;
           return (
-            <ForFollowersOrFollowing>
-              <ForFollowersOrFollowingImage></ForFollowersOrFollowingImage>
+            <ForFollowersOrFollowing key={index}>
+              <ForFollowersOrFollowingImage
+                src={userDetails.mobile_profile_pic_url}
+            />
 
               <p style={{ color: "white", paddingLeft: "10px" }}>
-                RAMAVATAR MEENA
+                {userDetails.platformusername}
               </p>
             </ForFollowersOrFollowing>
           );
@@ -52,7 +62,7 @@ const ForFollowersOrFollowing = styled.div`
   margin-left: 10px;
 `;
 
-const ForFollowersOrFollowingImage = styled.div`
+const ForFollowersOrFollowingImage = styled.img`
   width: 40px;
   height: 40px;
   border-radius: 50%;
