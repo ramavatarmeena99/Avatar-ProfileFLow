@@ -7,7 +7,7 @@ import Tab from "@material-ui/core/Tab";
 import styled from "styled-components";
 import FollowersOrFollowingPage from "./FollowingOrFollowingPage";
 import ProfileHeader from "./ProfileHeader";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -20,18 +20,23 @@ const useStyles = makeStyles({
 });
 
 export default function FollowersOrFollowing(props) {
-  const { type } = useParams();
+  const { type, id } = useParams();
   let _default = 0;
   if (type === "followers") {
-    _default=0;
-  }else{
-    _default=1;
+    _default = 0;
+  } else {
+    _default = 1;
   }
   const classes = useStyles();
   const [value, setValue] = React.useState(_default);
+  const Navigate = useNavigate();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+
+    Navigate(
+      `/followersorfollowing/${newValue == 0 ? "followers" : "following"}/${id}`
+    );
   };
 
   return (
@@ -49,8 +54,8 @@ export default function FollowersOrFollowing(props) {
           <Tab label="FOLLOWING " />
         </Tabs>
 
-        {value === 0 && <FollowersOrFollowingPage />}
-        {value === 1 && <FollowersOrFollowingPage />}
+        {value === 0 && <FollowersOrFollowingPage type="followers" />}
+        {value === 1 && <FollowersOrFollowingPage type="following" />}
       </Paper>
     </Profiletab>
   );

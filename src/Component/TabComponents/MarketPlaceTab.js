@@ -5,7 +5,7 @@ import { BiDotsVerticalRounded } from "react-icons/bi";
 import { BsFillPlayFill } from "react-icons/bs";
 
 import { Menu, MenuItem } from "@material-ui/core";
-export default function ReelsTab() {
+export default function MarketPlaceTab() {
   return (
     <Reels>
       {Array(21)

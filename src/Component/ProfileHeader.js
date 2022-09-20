@@ -5,12 +5,22 @@ import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function ProfileHeader() {
+  const {id} = useParams();
+
+  // let userId=""
+  // if(id){
+  //   userId=id
+  // }else{
+  //   userId=user_id
+
+  // }
+
   const Navigate = useNavigate();
   const backButton = () => {
-    Navigate("/");
+    Navigate(`/profile/${id}`);
   };
 
   return (

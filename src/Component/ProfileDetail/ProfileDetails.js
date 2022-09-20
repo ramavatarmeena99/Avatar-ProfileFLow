@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ClanDetail from "./ClanDetail";
 import Youtube from "../../Images/youtube.png";
 import Instagram from "../../Images/instagram.png";
@@ -7,56 +7,104 @@ import Discord from "../../Images/discord.png";
 import Joined from "../../Images/JOINED.png";
 import Hosted from "../../Images/Hosted.png";
 import Earnings from "../../Images/Earnings.png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { BiShareAlt } from "react-icons/bi";
 import styled from "styled-components";
+import { api2 } from "../../utils/handler";
 export default function ProfileDetails() {
+  const [detail, setDetail] = useState();
+  const [followFollowingCount, setFollowFollowingCount] = useState();
+
+  const { id } = useParams();
+
   const Navigate = useNavigate();
   const followers = () => {
-    Navigate("/followersorfollowing/followers", {
+    Navigate(`/followersorfollowing/followers/${id}`, {
       state: {
         id: 0,
       },
     });
   };
   const following = () => {
-    Navigate("/followersorfollowing/following");
+    Navigate(`/followersorfollowing/following/${id}`);
   };
+
+  const getProfileDetails = async () => {
+    const endpoint = `api/v1/esport/esport_game_contest/userProfile?id=${id}`;
+    const res = await api2("get", {}, endpoint);
+
+    // console.log(res.data);
+
+    if (res.data.success) {
+      setDetail(res.data.results);
+    } 
+  };
+
+  const getFollowFollowingCount = async () => {
+    const endpoint = `api/v1/esport/followers/count?user_id=${id}`;
+    const res = await api2("get", {}, endpoint);
+
+    // console.log(res.data);
+
+    if (res.data.success) {
+      setFollowFollowingCount(res.data.results);
+    } else {
+      alert(res.data.error.message);
+    }
+  };
+
+  useEffect(() => {
+    getProfileDetails();
+    getFollowFollowingCount();
+  }, []);
   return (
     <ForProfileDetails>
       <ForUserProfile>
         <ForUserProfileImage>
-          <UserProfileImage></UserProfileImage>
+          <UserProfileImage src={detail?.userDetails.mobile_profile_pic_url
+}></UserProfileImage>
         </ForUserProfileImage>
         <ForUserNameOrDetails>
           <ForUserName>
-            <p>Siireya</p>
+            <p>{detail?.userDetails.platformusername}</p>
           </ForUserName>
           <ForFollowingOrFollowers>
-            <TotalFollowersOrFollowings onClick={followers}> 01 Followers</TotalFollowersOrFollowings>
-            <TotalFollowersOrFollowings onClick={following}>22 Following</TotalFollowersOrFollowings>
+            <TotalFollowersOrFollowings onClick={followers}>
+              {followFollowingCount?.followersCount}
+                Followers
+            </TotalFollowersOrFollowings>
+            <TotalFollowersOrFollowings onClick={following}>
+              {followFollowingCount?.followingCount}
+                Following
+            </TotalFollowersOrFollowings>
           </ForFollowingOrFollowers>
         </ForUserNameOrDetails>
       </ForUserProfile>
-      <p>Design Enthusiast, gamer, nft, crypto, stock, web3</p>
+      <p>{detail?.userDetails.description}</p>
       <ForSocialMediaIcons>
         <div>
-          <AllSocialMediaIcons
-            src={Youtube}
-            alt="youtube "
-          ></AllSocialMediaIcons>
+          <a href={detail?.userDetails.youtube}>
+            <AllSocialMediaIcons
+              src={Youtube}
+              alt="youtube "
+            ></AllSocialMediaIcons>
+          </a>
         </div>
         <div>
-          <AllSocialMediaIcons
-            src={Instagram}
-            alt="instagram "
-          ></AllSocialMediaIcons>
+          <a href={detail?.userDetails.instagram}>
+            <AllSocialMediaIcons
+              src={Instagram}
+              alt="instagram "
+            ></AllSocialMediaIcons>
+          </a>
         </div>
         <div>
-          <AllSocialMediaIcons
-            src={Discord}
-            alt="facebook "
-          ></AllSocialMediaIcons>
+          <a href={detail?.userDetails.discord}>
+            <AllSocialMediaIcons
+              src={Discord}
+              alt="facebook "
+            ></AllSocialMediaIcons>
+          </a>
         </div>
         <div>
           <AllSocialMediaIcons
@@ -67,16 +115,27 @@ export default function ProfileDetails() {
       </ForSocialMediaIcons>
       <ForWin>
         <Join>
-          <JoinHostOrEarningIcons src={Joined} alt="Joined "></JoinHostOrEarningIcons>
-          <TotalJoin>100 Joined</TotalJoin>
+          <JoinHostOrEarningIcons
+            src={Joined}
+            alt="Joined "
+          ></JoinHostOrEarningIcons>
+          <TotalJoin>{detail?.total_tournament_played} Joined</TotalJoin>
         </Join>
         <Host>
-          <JoinHostOrEarningIcons src={Hosted} alt="Hosted "></JoinHostOrEarningIcons>
-          <TotalHosted>100 Hosted</TotalHosted>
+          <JoinHostOrEarningIcons
+            src={Hosted}
+            alt="Hosted "
+          ></JoinHostOrEarningIcons>
+          <TotalHosted>{detail?.total_tournament_hosted} Hosted</TotalHosted>
         </Host>
         <Earning>
-          <JoinHostOrEarningIcons src={Earnings} alt="earnings "></JoinHostOrEarningIcons>
-          <TotalEarning>₹ 100 Earning</TotalEarning>
+          <JoinHostOrEarningIcons
+            src={Earnings}
+            alt="earnings "
+          ></JoinHostOrEarningIcons>
+          <TotalEarning>
+            ₹ {detail?.total_prize_money / 100} Earning
+          </TotalEarning>
         </Earning>
 
         <ShareIcon>
@@ -110,7 +169,7 @@ const ForUserProfileImage = styled.div`
   justify-content: flex-start;
   padding-left: 10px;
 `;
-const UserProfileImage = styled.div`
+const UserProfileImage = styled.img`
   width: 120px;
   height: 120px;
   border-radius: 50%;
@@ -129,8 +188,8 @@ const ForUserName = styled.div`
   align-items: flex-end;
   justify-content: flex-start;
   font-weight: 500;
-font-size: 18px;
-line-height: 21px;
+  font-size: 18px;
+  line-height: 21px;
   padding-left: 10px;
 `;
 const ForFollowingOrFollowers = styled.div`
@@ -191,21 +250,21 @@ const ShareIcon = styled.div`
   color: #3389e9;
 `;
 const TotalEarning = styled.p`
-font-weight: 400;
-font-size: 14px;
-line-height: 17px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
   padding-top: 10px;
 `;
 const TotalHosted = styled.p`
-font-weight: 400;
-font-size: 14px;
-line-height: 17px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
   padding-top: 10px;
 `;
 const TotalJoin = styled.p`
-font-weight: 400;
-font-size: 14px;
-line-height: 17px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
   padding-top: 10px;
 `;
 const AllSocialMediaIcons = styled.img`
@@ -215,14 +274,13 @@ const AllSocialMediaIcons = styled.img`
 `;
 
 const TotalFollowersOrFollowings = styled.p`
-font-weight: 400;
-font-size: 14px;
-line-height: 17px;
-padding-left: 10px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  padding-left: 10px;
 `;
 
 const JoinHostOrEarningIcons = styled.img`
   width: 30px;
   height: 30px;
-
 `;

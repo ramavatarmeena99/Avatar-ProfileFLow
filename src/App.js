@@ -7,10 +7,10 @@ function App() {
   return (
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Profile />} />
-          <Route path="/editprofile/:user_id" element={<EditProfilePage />} />
+          <Route path="/profile/:id" element={<Profile />} />
+          <Route path="/editprofile/:id" element={<EditProfilePage />} />
           <Route
-            path="/followersorfollowing/:type"
+            path="/followersorfollowing/:type/:id"
             element={<FollowersOrFollowing />}
           />
         </Routes>

@@ -6,8 +6,8 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import AboutTab from "./AboutTabs/AboutTab";
 import ReelsTab from "./ReelsTab";
-import MarketPlace from "./MarketPlace";
 import styled from "styled-components";
+import MarketPlaceTab from "./MarketPlaceTab";
 
 
 const useStyles = makeStyles({
@@ -45,7 +45,7 @@ export default function ProfileTab() {
       </Tabs>
       {value=== 0 && <AboutTab/>}
       {value=== 1 && <ReelsTab/>}
-      {value=== 2 && <MarketPlace/>}
+      {value=== 2 && <MarketPlaceTab/>}
 
     </Paper>
 </Profiletab>
@@ -60,7 +60,7 @@ const Profiletab = styled.div`
   align-items:center;
   justify-content:space-between;
 color:white;
-    background-color:#272727;
+    background-color:none;
     margin-top:20px;
   
 `
