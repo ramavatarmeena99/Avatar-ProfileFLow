@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import YamahaBike from "../../Images/YamahaBike.jpeg";
 import styled from "styled-components";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { BsFillPlayFill } from "react-icons/bs";

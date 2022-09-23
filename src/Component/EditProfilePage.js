@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import ProfileHeader from "./ProfileHeader";
+import { BiArrowBack } from "react-icons/bi";
 import styled from "styled-components";
 import { api2 } from "../utils/handler";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import HeaderForProps from "./HeaderForProps";
 export default function EditProfilePage() {
   const [updateUserProfileImage, setUpdateUserProfileImage] = useState();
   const { id } = useParams();
@@ -15,10 +16,19 @@ export default function EditProfilePage() {
 
 
 
+  const Navigate = useNavigate();
+  const backButton = () => {
+    Navigate(`/profile/${id}`);
+  };
 
 
 
   const updateUserProfile = async () => {
+    if(!userName){
+      alert("user Name requred")
+      return
+    }
+
     const data = {
       platformusername: userName,
       email,
@@ -36,10 +46,16 @@ export default function EditProfilePage() {
 
     const endpoint = `api/v1/esport/esport_game_contest/updateUser?id=${id}`;
     const res = await api2("post", data, endpoint);
+ 
 
     if (res.data.success) {
-      alert("Suucsdfsd ");
+
+      alert("Success ");
+    Navigate(`/profile/${id}`);
+
     }
+    
+   
   };
 
   const getProfileDetails = async () => {
@@ -71,8 +87,20 @@ export default function EditProfilePage() {
 
   return (
     <ForEditProfilePage>
-      <ProfileHeader />
-      <button onClick={updateUserProfile}>UPDATE KRO</button>
+      <HeaderForProps 
+              Back_Button={<BiArrowBack onClick={backButton} />}
+
+      HeaderTitle={userName}
+      SaveButton={<button  
+        style={{
+        backgroundColor: "transparent",
+        color: "#50A3FF",
+        fontSize: "16px",
+        border:"none"
+      }}
+       onClick={updateUserProfile}>SAVE</button>}
+      />
+
       <ForEditProfileImage>
         <ForEditImage src={updateUserProfileImage}></ForEditImage>
         <ForEditProfileTitle>Upload Profile Picture</ForEditProfileTitle>
@@ -138,7 +166,7 @@ export default function EditProfilePage() {
   );
 }
 
-const ForEditProfilePage = styled.p`
+const ForEditProfilePage = styled.div`
   width: 100%;
   height: auto;
   padding-bottom: 20px;

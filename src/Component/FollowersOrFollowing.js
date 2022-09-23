@@ -14,7 +14,8 @@ const useStyles = makeStyles({
     flexGrow: 1,
     flex: "1",
     width: "100%",
-    backgroundColor: "#161616",
+    height: "auto",
+    backgroundColor: "#000000",
     color: "white",
   },
 });
@@ -35,7 +36,7 @@ export default function FollowersOrFollowing(props) {
     setValue(newValue);
 
     Navigate(
-      `/followersorfollowing/${newValue == 0 ? "followers" : "following"}/${id}`
+      `/followersorfollowing/${newValue === 0 ? "followers" : "following"}/${id}`
     );
   };
 
@@ -49,6 +50,15 @@ export default function FollowersOrFollowing(props) {
           indicatorColor="primary"
           textColor="inherit"
           centered
+          style={{
+            width: "100%",
+            height: "5vh",
+            backgroundColor: "#161616",
+            color: "red",
+            fontWeight: "800",
+            fontSize: "16px",
+            lineHeight: "19px",
+          }}
         >
           <Tab label="FOLLOWERS " />
           <Tab label="FOLLOWING " />
@@ -69,5 +79,4 @@ const Profiletab = styled.div`
   align-items: center;
   justify-content: space-between;
   color: white;
-  background-color: #272727;
 `;

@@ -13,6 +13,8 @@ import styled from "styled-components";
 import { api2 } from "../../utils/handler";
 export default function ProfileDetails() {
   const [detail, setDetail] = useState();
+  const [disable, setDisable] = useState(false);
+
   const [followFollowingCount, setFollowFollowingCount] = useState();
 
   const { id } = useParams();
@@ -33,11 +35,14 @@ export default function ProfileDetails() {
     const endpoint = `api/v1/esport/esport_game_contest/userProfile?id=${id}`;
     const res = await api2("get", {}, endpoint);
 
-    // console.log(res.data);
+    console.log(res.data);
+
+   
 
     if (res.data.success) {
       setDetail(res.data.results);
-    } 
+     
+    }
   };
 
   const getFollowFollowingCount = async () => {
@@ -61,8 +66,9 @@ export default function ProfileDetails() {
     <ForProfileDetails>
       <ForUserProfile>
         <ForUserProfileImage>
-          <UserProfileImage src={detail?.userDetails.mobile_profile_pic_url
-}></UserProfileImage>
+          <UserProfileImage
+            src={detail?.userDetails.mobile_profile_pic_url}
+          ></UserProfileImage>
         </ForUserProfileImage>
         <ForUserNameOrDetails>
           <ForUserName>
@@ -71,11 +77,11 @@ export default function ProfileDetails() {
           <ForFollowingOrFollowers>
             <TotalFollowersOrFollowings onClick={followers}>
               {followFollowingCount?.followersCount}
-                Followers
+              Followers
             </TotalFollowersOrFollowings>
             <TotalFollowersOrFollowings onClick={following}>
               {followFollowingCount?.followingCount}
-                Following
+              Following
             </TotalFollowersOrFollowings>
           </ForFollowingOrFollowers>
         </ForUserNameOrDetails>
@@ -83,24 +89,29 @@ export default function ProfileDetails() {
       <p>{detail?.userDetails.description}</p>
       <ForSocialMediaIcons>
         <div>
-          <a href={detail?.userDetails.youtube}>
+          <a href={detail?.userDetails.youtube?detail?.userDetails.youtube:"#"}>
             <AllSocialMediaIcons
+              style={{opacity:detail?.userDetails.youtube?1: .4}}
               src={Youtube}
               alt="youtube "
             ></AllSocialMediaIcons>
           </a>
         </div>
         <div>
-          <a href={detail?.userDetails.instagram}>
+          <a href={detail?.userDetails.instagram?detail?.userDetails.instagram:"#"}>
             <AllSocialMediaIcons
+              style={{opacity:detail?.userDetails.instagram?1: .4}}
+
               src={Instagram}
               alt="instagram "
             ></AllSocialMediaIcons>
           </a>
         </div>
         <div>
-          <a href={detail?.userDetails.discord}>
+          <a href={detail?.userDetails.discord?detail?.userDetails.discord:"#"}>
             <AllSocialMediaIcons
+              style={{opacity:detail?.userDetails.discord?1: .4}}
+
               src={Discord}
               alt="facebook "
             ></AllSocialMediaIcons>
@@ -108,6 +119,8 @@ export default function ProfileDetails() {
         </div>
         <div>
           <AllSocialMediaIcons
+              style={{opacity:detail?.userDetails.facebook?1: .4}}
+
             src={Facebook}
             alt="discord "
           ></AllSocialMediaIcons>

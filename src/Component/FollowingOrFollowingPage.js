@@ -14,13 +14,14 @@ export default function FollowersOrFollowingPage() {
     const res = await api2("get", {}, endpoint);
 
     console.log(res.data);
-
+   
     if (res.data.success) {
       if (type === "followers") {
         setAllUserFollowersOrFollowing(res.data.results.followers.docs);
       } else {
         setAllUserFollowersOrFollowing(res.data.results.following.docs);
       }
+     
     }
   };
 
@@ -40,7 +41,7 @@ export default function FollowersOrFollowingPage() {
             <ForFollowersOrFollowing key={index}>
               <ForFollowersOrFollowingImage
                 src={userDetails.mobile_profile_pic_url}
-            />
+              />
 
               <p style={{ color: "white", paddingLeft: "10px" }}>
                 {userDetails.platformusername}
@@ -60,11 +61,11 @@ const ForFollowersOrFollowing = styled.div`
   justify-content: flex-start;
   margin-top: 10px;
   margin-left: 10px;
+  background-color: #000000;
 `;
 
 const ForFollowersOrFollowingImage = styled.img`
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: red;
 `;

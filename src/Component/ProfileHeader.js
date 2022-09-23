@@ -1,22 +1,14 @@
 import React from "react";
 import { BiArrowBack } from "react-icons/bi";
 import { BiDotsVerticalRounded } from "react-icons/bi";
-import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
+import HeaderForProps from "./HeaderForProps";
 
 export default function ProfileHeader() {
-  const {id} = useParams();
-
-  // let userId=""
-  // if(id){
-  //   userId=id
-  // }else{
-  //   userId=user_id
-
-  // }
+  const { id } = useParams();
 
   const Navigate = useNavigate();
   const backButton = () => {
@@ -25,10 +17,16 @@ export default function ProfileHeader() {
 
   return (
     <ProfileTab>
-      <BackButton>
-        <BiArrowBack onClick={backButton} />
-      </BackButton>
-      <ProfileFLowTitle>Profile</ProfileFLowTitle>
+
+      <HeaderForProps
+        Back_Button={<BiArrowBack onClick={backButton} />}
+        HeaderTitle="Profile"
+        Dot_Icon={
+        <BiDotsVerticalRounded />
+
+        }
+      />
+
 
       <SimpleMenu />
     </ProfileTab>
@@ -46,47 +44,28 @@ const ProfileTab = styled.div`
   padding: 0px 10px;
   background-color: #272727;
 `;
-const BackButton = styled.p`
-  font-size: 20px;
-`;
-const ProfileFLowTitle = styled.p`
-  font-size: 16px;
-  font-weight: 400px;
-  line-height: 19px;
-  color: #fbfbfb;
-`;
+
 
 export function SimpleMenu() {
+  const { id } = useParams();
+
   const Navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+
 
   const handleClose = () => {
     setAnchorEl(null);
   };
 
   const handleRedirect = () => {
-    Navigate("/editprofile/398478");
+    Navigate(`/editprofile/${id}`);
 
     handleClose();
   };
 
   return (
     <>
-      <Button
-        style={{
-          color: "white",
-          fontSize: "20px",
-        }}
-        aria-controls="simple-menu"
-        aria-haspopup="true"
-        onClick={handleClick}
-      >
-        <BiDotsVerticalRounded />
-      </Button>
       <Menu
         id="simple-menu"
         anchorEl={anchorEl}
