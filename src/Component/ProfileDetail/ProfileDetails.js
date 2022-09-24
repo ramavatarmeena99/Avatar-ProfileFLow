@@ -57,6 +57,9 @@ export default function ProfileDetails() {
       alert(res.data.error.message);
     }
   };
+ const isDisableYoutube = detail?.userDetails.youtube?detail?.userDetails.youtube:"#"
+ const isDisableInstagram = detail?.userDetails.instagram?detail?.userDetails.instagram:"#"
+ const isDisableDiscord = detail?.userDetails.discord?detail?.userDetails.discord:"#"
 
   useEffect(() => {
     getProfileDetails();
@@ -86,10 +89,10 @@ export default function ProfileDetails() {
           </ForFollowingOrFollowers>
         </ForUserNameOrDetails>
       </ForUserProfile>
-      <p>{detail?.userDetails.description}</p>
+      <p>{detail?.userDetails.descridiscriptiontion}</p>
       <ForSocialMediaIcons>
         <div>
-          <a href={detail?.userDetails.youtube?detail?.userDetails.youtube:"#"}>
+          <a href={isDisableYoutube}>
             <AllSocialMediaIcons
               style={{opacity:detail?.userDetails.youtube?1: .4}}
               src={Youtube}
@@ -98,7 +101,7 @@ export default function ProfileDetails() {
           </a>
         </div>
         <div>
-          <a href={detail?.userDetails.instagram?detail?.userDetails.instagram:"#"}>
+          <a href={isDisableInstagram}>
             <AllSocialMediaIcons
               style={{opacity:detail?.userDetails.instagram?1: .4}}
 
@@ -108,7 +111,7 @@ export default function ProfileDetails() {
           </a>
         </div>
         <div>
-          <a href={detail?.userDetails.discord?detail?.userDetails.discord:"#"}>
+          <a href={isDisableDiscord}>
             <AllSocialMediaIcons
               style={{opacity:detail?.userDetails.discord?1: .4}}
 
@@ -297,3 +300,4 @@ const JoinHostOrEarningIcons = styled.img`
   width: 30px;
   height: 30px;
 `;
+

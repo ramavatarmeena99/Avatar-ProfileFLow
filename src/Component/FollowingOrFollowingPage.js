@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { api2 } from "../utils/handler";
+import { set } from "../utils/helper";
 
 export default function FollowersOrFollowingPage() {
   const [allUserFollowersOrFollowing, setAllUserFollowersOrFollowing] =
     useState([]);
-
+  const [isShow, setIsShow] = useState(false);
   const { id, type } = useParams();
 
   const getAllUsersForFollowers = async () => {
@@ -14,14 +15,17 @@ export default function FollowersOrFollowingPage() {
     const res = await api2("get", {}, endpoint);
 
     console.log(res.data);
-   
+
     if (res.data.success) {
       if (type === "followers") {
         setAllUserFollowersOrFollowing(res.data.results.followers.docs);
+        
       } else {
         setAllUserFollowersOrFollowing(res.data.results.following.docs);
       }
-     
+    }
+    if ("followers"?.length > 0) {
+      setIsShow(true);
     }
   };
 
@@ -30,6 +34,7 @@ export default function FollowersOrFollowingPage() {
   }, []);
 
   return (
+
     <div>
       {allUserFollowersOrFollowing?.length > 0 &&
         allUserFollowersOrFollowing.map((item, index) => {
@@ -49,6 +54,24 @@ export default function FollowersOrFollowingPage() {
             </ForFollowersOrFollowing>
           );
         })}
+      {isShow && (
+        <div
+          style={{
+            width: "100%",
+            height: "auto",
+            display: "flex",
+            alignItems: "flex-start",
+            justifyContent: "center",
+            paddingTop: "30px",
+            fontSize:"25px",
+            fontWeight:"700",
+            lineHeight:"17px",
+            color:"#FE4949"
+          }}
+        >
+          NO DATA FOUND
+        </div>
+      )}
     </div>
   );
 }
