@@ -54,23 +54,22 @@ export default function ProfileDetails() {
       alert(res.data.error.message);
     }
   };
-  const isDisableYoutube = detail?.userDetails.youtube
+  const disableYoutube = detail?.userDetails.youtube
     ? detail?.userDetails.youtube
     : "#";
-  const isDisableInstagram = detail?.userDetails.instagram
+  const disableInstagram = detail?.userDetails.instagram
     ? detail?.userDetails.instagram
     : "#";
-  const isDisableDiscord = detail?.userDetails.discord
+  const disableDiscord = detail?.userDetails.discord
     ? detail?.userDetails.discord
     : "#";
-  const isDiscription =
+  const discription =
     detail?.userDetails.description ||
     "andbasmbd masbm dbasdv asvndv ans vdvasjd jasjhd jas djagsjd gjashgdj gjasgdjgj";
 
-const readMore = () =>{
-  setIsReadMore(!isReadMore);
-
-}
+  const readMore = () => {
+    setIsReadMore(!isReadMore);
+  };
 
   useEffect(() => {
     getProfileDetails();
@@ -102,21 +101,20 @@ const readMore = () =>{
       </ForUserProfile>
 
       <p>
-        {isDiscription?.length > 50 && isReadMore
-          ? isDiscription?.slice(0, 80) + ""
-          : isDiscription}
+        {discription?.length > 50 && isReadMore
+          ? discription?.slice(0, 80) + ""
+          : discription}
 
-      {isDiscription?.length > 50  && <span
-      style={{color:"#FE4949"}}
-      onClick={readMore} >
-        {isReadMore ? "....Read More" : "....Show Less"}
-
-        </span>}
+        {discription?.length > 50 && (
+          <span style={{ color: "#FE4949" }} onClick={readMore}>
+            {isReadMore ? "....Read More" : "....Show Less"}
+          </span>
+        )}
       </p>
 
       <ForSocialMediaIcons>
         <div>
-          <a href={isDisableYoutube}>
+          <a href={disableYoutube}>
             <AllSocialMediaIcons
               style={{ opacity: detail?.userDetails.youtube ? 1 : 0.4 }}
               src={Youtube}
@@ -125,7 +123,7 @@ const readMore = () =>{
           </a>
         </div>
         <div>
-          <a href={isDisableInstagram}>
+          <a href={disableInstagram}>
             <AllSocialMediaIcons
               style={{ opacity: detail?.userDetails.instagram ? 1 : 0.4 }}
               src={Instagram}
@@ -134,7 +132,7 @@ const readMore = () =>{
           </a>
         </div>
         <div>
-          <a href={isDisableDiscord}>
+          <a href={disableDiscord}>
             <AllSocialMediaIcons
               style={{ opacity: detail?.userDetails.discord ? 1 : 0.4 }}
               src={Discord}
