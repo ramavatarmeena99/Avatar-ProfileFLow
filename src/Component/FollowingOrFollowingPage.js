@@ -15,17 +15,18 @@ export default function FollowersOrFollowingPage() {
     const res = await api2("get", {}, endpoint);
 
     console.log(res.data);
-
+   
     if (res.data.success) {
+      
       if (type === "followers") {
         setAllUserFollowersOrFollowing(res.data.results.followers.docs);
-        
+        if ( (type === "followers").length === 0) {
+          alert("empty")
+          setIsShow(true);
+        }
       } else {
         setAllUserFollowersOrFollowing(res.data.results.following.docs);
       }
-    }
-    if ("followers"?.length > 0) {
-      setIsShow(true);
     }
   };
 
@@ -34,7 +35,6 @@ export default function FollowersOrFollowingPage() {
   }, []);
 
   return (
-
     <div>
       {allUserFollowersOrFollowing?.length > 0 &&
         allUserFollowersOrFollowing.map((item, index) => {
@@ -63,10 +63,10 @@ export default function FollowersOrFollowingPage() {
             alignItems: "flex-start",
             justifyContent: "center",
             paddingTop: "30px",
-            fontSize:"25px",
-            fontWeight:"700",
-            lineHeight:"17px",
-            color:"#FE4949"
+            fontSize: "25px",
+            fontWeight: "700",
+            lineHeight: "17px",
+            color: "#FE4949",
           }}
         >
           NO DATA FOUND

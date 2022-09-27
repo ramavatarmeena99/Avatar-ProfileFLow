@@ -13,7 +13,6 @@ import styled from "styled-components";
 import { api2 } from "../../utils/handler";
 export default function ProfileDetails() {
   const [detail, setDetail] = useState();
-  const [disable, setDisable] = useState(false);
 
   const [followFollowingCount, setFollowFollowingCount] = useState();
 
@@ -37,11 +36,8 @@ export default function ProfileDetails() {
 
     console.log(res.data);
 
-   
-
     if (res.data.success) {
       setDetail(res.data.results);
-     
     }
   };
 
@@ -57,9 +53,15 @@ export default function ProfileDetails() {
       alert(res.data.error.message);
     }
   };
- const isDisableYoutube = detail?.userDetails.youtube?detail?.userDetails.youtube:"#"
- const isDisableInstagram = detail?.userDetails.instagram?detail?.userDetails.instagram:"#"
- const isDisableDiscord = detail?.userDetails.discord?detail?.userDetails.discord:"#"
+  const isDisableYoutube = detail?.userDetails.youtube
+    ? detail?.userDetails.youtube
+    : "#";
+  const isDisableInstagram = detail?.userDetails.instagram
+    ? detail?.userDetails.instagram
+    : "#";
+  const isDisableDiscord = detail?.userDetails.discord
+    ? detail?.userDetails.discord
+    : "#";
 
   useEffect(() => {
     getProfileDetails();
@@ -89,12 +91,14 @@ export default function ProfileDetails() {
           </ForFollowingOrFollowers>
         </ForUserNameOrDetails>
       </ForUserProfile>
-      <p>{detail?.userDetails.descridiscriptiontion}</p>
+
+      <p>{detail?.userDetails.description}</p>
+
       <ForSocialMediaIcons>
         <div>
           <a href={isDisableYoutube}>
             <AllSocialMediaIcons
-              style={{opacity:detail?.userDetails.youtube?1: .4}}
+              style={{ opacity: detail?.userDetails.youtube ? 1 : 0.4 }}
               src={Youtube}
               alt="youtube "
             ></AllSocialMediaIcons>
@@ -103,8 +107,7 @@ export default function ProfileDetails() {
         <div>
           <a href={isDisableInstagram}>
             <AllSocialMediaIcons
-              style={{opacity:detail?.userDetails.instagram?1: .4}}
-
+              style={{ opacity: detail?.userDetails.instagram ? 1 : 0.4 }}
               src={Instagram}
               alt="instagram "
             ></AllSocialMediaIcons>
@@ -113,8 +116,7 @@ export default function ProfileDetails() {
         <div>
           <a href={isDisableDiscord}>
             <AllSocialMediaIcons
-              style={{opacity:detail?.userDetails.discord?1: .4}}
-
+              style={{ opacity: detail?.userDetails.discord ? 1 : 0.4 }}
               src={Discord}
               alt="facebook "
             ></AllSocialMediaIcons>
@@ -122,8 +124,7 @@ export default function ProfileDetails() {
         </div>
         <div>
           <AllSocialMediaIcons
-              style={{opacity:detail?.userDetails.facebook?1: .4}}
-
+            style={{ opacity: detail?.userDetails.facebook ? 1 : 0.4 }}
             src={Facebook}
             alt="discord "
           ></AllSocialMediaIcons>
@@ -300,4 +301,3 @@ const JoinHostOrEarningIcons = styled.img`
   width: 30px;
   height: 30px;
 `;
-
