@@ -20,10 +20,7 @@ export default function FollowersOrFollowingPage() {
       
       if (type === "followers") {
         setAllUserFollowersOrFollowing(res.data.results.followers.docs);
-        if ( (type === "followers").length === 0) {
-          alert("empty")
-          setIsShow(true);
-        }
+     
       } else {
         setAllUserFollowersOrFollowing(res.data.results.following.docs);
       }
@@ -36,42 +33,44 @@ export default function FollowersOrFollowingPage() {
 
   return (
     <div>
-      {allUserFollowersOrFollowing?.length > 0 &&
-        allUserFollowersOrFollowing.map((item, index) => {
-          const userDetails =
-            type === "followers"
-              ? item.followed_by_details
-              : item.following_users_details;
-          return (
-            <ForFollowersOrFollowing key={index}>
-              <ForFollowersOrFollowingImage
-                src={userDetails.mobile_profile_pic_url}
-              />
+      {allUserFollowersOrFollowing?.length !== 0 ?(
+allUserFollowersOrFollowing.map((item, index) => {
+  const userDetails =
+    type === "followers"
+      ? item.followed_by_details
+      : item.following_users_details;
+  return (
+    <ForFollowersOrFollowing key={index}>
+      <ForFollowersOrFollowingImage
+        src={userDetails.mobile_profile_pic_url}
+      />
 
-              <p style={{ color: "white", paddingLeft: "10px" }}>
-                {userDetails.platformusername}
-              </p>
-            </ForFollowersOrFollowing>
-          );
-        })}
-      {isShow && (
+      <p style={{ color: "white", paddingLeft: "10px" }}>
+        {userDetails.platformusername}
+      </p>
+    </ForFollowersOrFollowing>
+  );
+})
+      ):(
         <div
-          style={{
-            width: "100%",
-            height: "auto",
-            display: "flex",
-            alignItems: "flex-start",
-            justifyContent: "center",
-            paddingTop: "30px",
-            fontSize: "25px",
-            fontWeight: "700",
-            lineHeight: "17px",
-            color: "#FE4949",
-          }}
-        >
-          NO DATA FOUND
-        </div>
-      )}
+        style={{
+          width: "100%",
+          height: "auto",
+          display: "flex",
+          alignItems: "flex-start",
+          justifyContent: "center",
+          paddingTop: "30px",
+          fontSize: "25px",
+          fontWeight: "700",
+          lineHeight: "17px",
+          color: "#FE4949",
+        }}
+      >
+        NO DATA FOUND
+      </div>
+      )
+        }
+   
     </div>
   );
 }

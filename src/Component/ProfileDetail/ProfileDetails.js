@@ -15,6 +15,7 @@ export default function ProfileDetails() {
   const [detail, setDetail] = useState();
 
   const [followFollowingCount, setFollowFollowingCount] = useState();
+  const [isReadMore, setIsReadMore] = useState(true);
 
   const { id } = useParams();
 
@@ -62,6 +63,14 @@ export default function ProfileDetails() {
   const isDisableDiscord = detail?.userDetails.discord
     ? detail?.userDetails.discord
     : "#";
+  const isDiscription =
+    detail?.userDetails.description ||
+    "andbasmbd masbm dbasdv asvndv ans vdvasjd jasjhd jas djagsjd gjashgdj gjasgdjgj";
+
+const readMore = () =>{
+  setIsReadMore(!isReadMore);
+
+}
 
   useEffect(() => {
     getProfileDetails();
@@ -92,7 +101,18 @@ export default function ProfileDetails() {
         </ForUserNameOrDetails>
       </ForUserProfile>
 
-      <p>{detail?.userDetails.description}</p>
+      <p>
+        {isDiscription?.length > 50 && isReadMore
+          ? isDiscription?.slice(0, 80) + ""
+          : isDiscription}
+
+      {isDiscription?.length > 50  && <span
+      style={{color:"#FE4949"}}
+      onClick={readMore} >
+        {isReadMore ? "....Read More" : "....Show Less"}
+
+        </span>}
+      </p>
 
       <ForSocialMediaIcons>
         <div>
