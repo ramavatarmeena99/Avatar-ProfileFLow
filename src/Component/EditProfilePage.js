@@ -13,6 +13,8 @@ export default function EditProfilePage() {
   const [youtube, setYoutube] = useState("");
   const [instagram, setInstagram] = useState("");
   const [discord, setDiscord] = useState("");
+  const [facebook, setFacebook] = useState("");
+
 
 
 
@@ -36,7 +38,7 @@ export default function EditProfilePage() {
       user_looking_for: null,
       description:bio,
       instagram,
-      // facebook,
+      facebook,
       // whatsapp,
       discord,
       youtube,
@@ -160,6 +162,17 @@ export default function EditProfilePage() {
               placeholder="Discord server link"
             ></YoutubeLink>
           </ForUserDetailsEdit>
+
+          <ForUserDetailsEdit>
+            <UserName>Discord link </UserName>
+            <YoutubeLink
+                         value={facebook}
+                         onChange={(e) => setFacebook(e.target.value)}
+              type="text"
+              placeholder="Facebook Profile link"
+            ></YoutubeLink>
+          </ForUserDetailsEdit>
+        
         </SocialMediaLink>
       </ForUserDetailsEdit>
     </ForEditProfilePage>
