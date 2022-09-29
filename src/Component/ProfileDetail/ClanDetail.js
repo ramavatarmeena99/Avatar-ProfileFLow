@@ -13,7 +13,7 @@ export default function ClanDetail() {
     const endpoint = `api/v1/esport/clan/myclan?user_id=${id}`;
     const res = await api2("get", {}, endpoint);
 
-    console.log(res.data);
+    // console.log(res.data);
 
     if (res.data.success) {
       setClanData(res.data.results[0]);

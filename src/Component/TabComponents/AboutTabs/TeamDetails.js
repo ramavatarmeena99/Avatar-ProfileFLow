@@ -1,8 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { teamData } from "./AboutTabData";
+import { api2 } from "../../../utils/handler";
+import { getGameName } from "../../../utils/helper";
 
 export default function TeamDetails() {
+
+  const [allTeamDetails, setAllTeamDetails] = useState([]);
+  
+
+  const { id } = useParams();
+  const getTeamDetails = async () => {
+    const endpoint = `api/v1/esport/esport_team/teamsByUser?id=${id}`;
+    const res = await api2("get", {}, endpoint);
+
+    console.log(res.data.results.teams);
+
+    if (res.data.results.teams) {
+      setAllTeamDetails(res.data.results.teams)
+    }
+  };
+  useEffect(() => {
+
+    getTeamDetails();
+  }, []);
   return (
     <>
       <TeamDetailsTitle>TeamDetails</TeamDetailsTitle>
@@ -16,25 +37,25 @@ export default function TeamDetails() {
             <TeamDetailsInTh>IGN</TeamDetailsInTh>
             <TeamDetailsInTh>PLAYER IGN</TeamDetailsInTh>
           </TeamPlayDetailsInTr>
-          {teamData.map((item, index) => {
+          {allTeamDetails.map((item, index) => {
             return (
               <TeamDetailsInTr
                 key={index}
                 style={{
                   borderBottom:
-                    index + 1 === teamData.length ? "none" : "1px solid red",
+                    index + 1 === allTeamDetails.length ? "none" : "1px solid #353535",
                 }}
               >
-                <TeamDetailsForTd>{item.game}</TeamDetailsForTd>
-                <TeamDetailsForTd>{item.teamName}</TeamDetailsForTd>
+                <TeamDetailsForTd>{getGameName(item.game_master_id)}</TeamDetailsForTd>
+                <TeamDetailsForTd>{item.name}</TeamDetailsForTd>
                 <TeamDetailsForTd>
-                  {item.playerIGN.map((e, ind) => {
+                  {item.other_members.map((e, ind) => {
                     return (
                       <TeamDetailsForUserName
                         key={ind}
                        
                       >
-                        <PlayerIGNNAme>{e.nameA}</PlayerIGNNAme>
+                        <PlayerIGNNAme>{e.username}</PlayerIGNNAme>
                       </TeamDetailsForUserName>
                     );
                   })}

@@ -35,7 +35,7 @@ export default function ProfileDetails() {
     const endpoint = `api/v1/esport/esport_game_contest/userProfile?id=${id}`;
     const res = await api2("get", {}, endpoint);
 
-    console.log(res.data);
+    // console.log(res.data);
 
     if (res.data.success) {
       setDetail(res.data.results);
