@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { api2 } from "../../../utils/handler";
-import { getGameName } from "../../../utils/helper";
+import { getGameName, getMyValue, showFinalVal } from "../../../utils/helper";
 
 export default function TeamDetails() {
   const [allTeamDetails, setAllTeamDetails] = useState([]);
@@ -29,8 +29,8 @@ export default function TeamDetails() {
           <tbody />
           <TeamPlayDetailsInTr>
             <GameDetailsInTh>Game</GameDetailsInTh>
-            <IgnDetailsInTh>IGN</IgnDetailsInTh>
-            <PlayerIgnDetailsInTh>PLAYER IGN</PlayerIgnDetailsInTh>
+            <IgnDetailsInTh>Team Name</IgnDetailsInTh>
+            <PlayerIgnDetailsInTh>PLAYERS</PlayerIgnDetailsInTh>
           </TeamPlayDetailsInTr>
           {allTeamDetails.map((item, index) => {
             return (
@@ -46,12 +46,16 @@ export default function TeamDetails() {
                 <TeamDetailsForTd>
                   {getGameName(item.game_master_id)}
                 </TeamDetailsForTd>
-                <TeamDetailsForTd>{item.name}</TeamDetailsForTd>
+                <TeamDetailsForTd>
+                  {getMyValue(item?.name)}
+                </TeamDetailsForTd>
                 <TeamDetailsForTd>
                   {item.other_members.map((e, ind) => {
                     return (
                       <TeamDetailsForUserName key={ind}>
-                        <PlayerIGNNAme>{e.username}</PlayerIGNNAme>
+                        <PlayerIGNNAme>
+                          {showFinalVal(e.platformusername,10)}
+                        </PlayerIGNNAme>
                       </TeamDetailsForUserName>
                     );
                   })}
@@ -109,7 +113,6 @@ const GameDetailsInTh = styled.th`
   color: #959595;
   background-color: #272727;
   border-top-left-radius: 5px;
-
 `;
 const IgnDetailsInTh = styled.th`
   flex: 1;
@@ -142,7 +145,6 @@ const PlayerIgnDetailsInTh = styled.th`
   color: #959595;
   background-color: #272727;
   border-top-right-radius: 5px;
-
 `;
 
 const TeamDetailsInTr = styled.tr`

@@ -24,3 +24,22 @@ export const getGameName = (game_master_id) => {
   
     return gameName;
   };
+
+  export const myUserId = 416364
+
+export const getMyValue = (val) => {
+  let finalVal = "-"
+  if(val?.length > 0){
+    finalVal = val
+  }
+  return finalVal
+}
+
+
+export const showFinalVal = (val,max) => {
+  let finalVal = val
+  if(val?.length > max){
+    finalVal = val?.slice(0,max)+ "..."
+  }
+  return finalVal
+}

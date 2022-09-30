@@ -11,6 +11,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { BiShareAlt } from "react-icons/bi";
 import styled from "styled-components";
 import { api2 } from "../../utils/handler";
+import { myUserId } from "../../utils/helper";
 export default function ProfileDetails() {
   const [detail, setDetail] = useState();
 
@@ -34,9 +35,12 @@ export default function ProfileDetails() {
   const getProfileDetails = async () => {
     const endpoint = `api/v1/esport/esport_game_contest/userProfile?id=${id}`;
     const res = await api2("get", {}, endpoint);
-
-    // console.log(res.data);
-
+    // if(myUserId != id){
+    // setShow(true)
+    //   console.log("true")
+    // }else{
+    //   console.log("not")
+    // }
     if (res.data.success) {
       setDetail(res.data.results);
     }
@@ -97,6 +101,60 @@ export default function ProfileDetails() {
               Following
             </TotalFollowersOrFollowings>
           </ForFollowingOrFollowers>
+          {+myUserId !== +id && (
+            <div
+              style={{
+                width: "100%",
+                height: "10vh",
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+                alignContent: "center",
+              }}
+            >
+              <div
+                style={{
+                  width: "120px",
+                  height: "40px",
+                  backgroundColor: "#3389E9",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  transform: "skew(-6deg)",
+                  marginRight: "10px",
+                }}
+              >
+                <p
+                  style={{
+                    transform: "skew(6deg)",
+                    fontWeight: "400",
+                    fontSize: "16px",
+                    lineHeight: "19px",
+                  }}
+                >
+                  FOLLOW
+                </p>
+              </div>
+
+              <div
+                style={{
+                  width: "120px",
+                  height: "40px",
+                  backgroundColor: "#3389E9",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  transform: "skew(-6deg)",
+                  backgroundColor: "#161616",
+                  color: "#3389E9",
+                }}
+              >
+                <p style={{ transform: "skew(6deg)",    fontWeight: "400",
+                    fontSize: "16px",
+                    lineHeight: "19px", }}>MESSEGE</p>
+              </div>
+            </div>
+          )}
         </ForUserNameOrDetails>
       </ForUserProfile>
 

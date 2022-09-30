@@ -4,6 +4,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
+import { myUserId } from "../utils/helper";
 
 export default function HeaderForProps({
   HeaderTitle,
@@ -40,7 +41,7 @@ export default function HeaderForProps({
           style={{
             color: "white",
             fontSize: "20px",
-            paddingRight:"0px",
+            paddingRight: "0px",
           }}
           aria-controls="simple-menu"
           aria-haspopup="true"
@@ -56,7 +57,7 @@ export default function HeaderForProps({
             color: "#50A3FF",
             fontSize: "16px",
             border: "none",
-            paddingRight:"15px"
+            paddingRight: "15px",
           }}
         >
           {SaveButton}
@@ -70,8 +71,13 @@ export default function HeaderForProps({
         onClose={handleClose}
         style={{ width: "auto", backgroundColor: "rgba(0,0,0,0.7)" }}
       >
-        <MenuItem onClick={handleRedirect}>Edit Profile</MenuItem>
+        {+myUserId === +id && (
+          <MenuItem onClick={handleRedirect}>Edit Profile</MenuItem>
+        )}
         <MenuItem onClick={handleClose}>Share Profile</MenuItem>
+        {+myUserId !== +id && (
+          <MenuItem style={{color:"red"}} onClick={handleClose}>Blocked Users</MenuItem>
+        )}
       </Menu>
     </ProfileTab>
   );
@@ -90,8 +96,7 @@ const ProfileTab = styled.div`
 `;
 const BackButton = styled.p`
   font-size: 20px;
-  padding-left:15px;
-
+  padding-left: 15px;
 `;
 const ProfileFLowTitle = styled.p`
   font-size: 16px;

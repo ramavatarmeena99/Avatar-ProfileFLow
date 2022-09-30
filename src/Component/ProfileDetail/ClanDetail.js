@@ -4,6 +4,7 @@ import { MdGroups } from "react-icons/md";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { api2 } from "../../utils/handler";
+import { myUserId } from "../../utils/helper";
 export default function ClanDetail() {
   const [clanData, setClanData] = useState();
   const { id } = useParams();
@@ -38,14 +39,66 @@ export default function ClanDetail() {
         </ClanTitleDiv>
         <ForShareOrGroupIcons>
           <ShareIconForClan>
-            <ShareButton>
+          <ShareButton>
+
+          {+myUserId === +id && (
               <BiShareAlt />
+        )}
             </ShareButton>
-          </ShareIconForClan>
-          <Group>
+        
+            {+myUserId !== +id && (
+              <ShareButton>
             <MdGroups />
             {clanData?.memberCount}
-          </Group>
+            </ShareButton>
+        )}
+            
+          </ShareIconForClan>
+          {+myUserId === +id && (
+  <Group>
+
+  <MdGroups />
+  {clanData?.memberCount}
+
+</Group>
+        )}
+       
+          {+myUserId !== +id && (
+  <Group>
+
+<div
+ style={{
+  fontWeight: " 400",
+  fontSize: "16px",
+  lineHeight: "19px",
+  color: "#FBFBFB",
+  width: "80px",
+  height: "30px",
+  border:"none",
+  outline:"none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  backgroundColor: "#E1012D",
+  transform: "skew(-6deg)",
+
+}}
+>
+  <p
+      style={{
+        transform: "skew(6deg)",
+        fontWeight: "400",
+        fontSize: "16px",
+        lineHeight: "19px",
+      }}
+  >JOIN</p>
+</div>
+
+
+</Group>
+        )}
+        
+   
         </ForShareOrGroupIcons>
       </ForClan>
     </>
