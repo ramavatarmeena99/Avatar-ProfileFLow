@@ -9,6 +9,8 @@ export default function IGNDetails() {
   const [allIgnDetails, setAllIgnDetails] = useState([]);
   const [ignName, setIgnName] = useState("");
   const [gameMasterId, setGameMasterId] = useState("");
+  const [alertMessege, setAlertMessege] = useState(null);
+
 
   const { id } = useParams();
   const getIgnDetails = async () => {
@@ -23,6 +25,16 @@ export default function IGNDetails() {
   };
 
   const updateIgnDetails = async () => {
+    if(!ignName){
+      setAlertMessege(true);
+      setTimeout(() => {
+        setAlertMessege(false);
+      }, 2000);
+      return () => {
+        clearTimeout(setAlertMessege);
+      };
+
+    }
     const requestBody = {
       ign_name: ignName,
     };
@@ -74,11 +86,16 @@ export default function IGNDetails() {
                   </IGNDetailsForTd>
                   <IGNDetailsForTd>{item?.ign_name}</IGNDetailsForTd>
                   <IGNDetailsEditForTd
-                    onClick={() => {
+                   
+                  >
+                    <p
+                     onClick={() => {
                       editIGNDetails(item);
                     }}
-                  >
+                    >
                     Edit
+
+                    </p>
                   </IGNDetailsEditForTd>
                 </IgnDetailsInTr>
               );
@@ -114,11 +131,14 @@ export default function IGNDetails() {
                     type="text"
                     placeholder="Enter IGN Name"
                   ></UpdateIgnName>
+                  {alertMessege ? <IgnNameAlertMessege>*Ign Name Required*</IgnNameAlertMessege> : null}
 
                   <UpdateButtonDiv>
+
                     <UpdateButton onClick={updateIgnDetails}>
                       UPDATE
                     </UpdateButton>
+
                   </UpdateButtonDiv>
                 </UpdateIgnDetailMainDiv>
               </UpdateIgnDetails>
@@ -155,7 +175,8 @@ const IGNDetailsForTd = styled.td`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  padding:5px 20px;
+
   font-size: 14px;
   font-weight: 400;
   line-height: 17px;
@@ -175,6 +196,8 @@ const IGNDetailsEditForTd = styled.td`
   line-height: 17px;
   color: #e1012d;
   text-align: left;
+  padding:0px 20px;
+
 `;
 const IgnDetailsInTh = styled.th`
   flex: 1;
@@ -182,10 +205,10 @@ const IgnDetailsInTh = styled.th`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
   font-size: 14px;
   font-weight: 400;
   line-height: 17px;
+  padding:0px 20px;
   color: #959595;
   text-align: left;
   background-color: #272727;
@@ -218,10 +241,10 @@ const UpdateIgnDetails = styled.div`
 
 const UpdateIgnDetailMainDiv = styled.div`
   width: 312px;
-  height: 190px;
+  height: auto;
   background-color: #161616;
   border-radius: 4px;
-  padding: 0px 10px;
+  padding: 10px 10px;
 `;
 const UpdateIgnDetailClose = styled.div`
   width: 100%;
@@ -253,6 +276,8 @@ const UpdateIgnName = styled.input`
 
 const UpdateButtonDiv = styled.div`
   display: flex;
+  flex-direction: column;
+
   align-items: center;
   justify-content: center;
   margin-top: 25px;
@@ -264,4 +289,12 @@ const UpdateButton = styled.button`
   background-color: #e1012d;
   border: none;
   outline: none;
+`;
+
+const IgnNameAlertMessege = styled.p`
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 19px;
+  padding: 10px 0px;
+  color: red;
 `;

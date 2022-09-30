@@ -88,14 +88,14 @@ const TeamDetailsForTd = styled.td`
   height: auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  // align-items: center;
   justify-content: space-around;
   font-size: 14px;
   font-weight: 400;
   line-height: 17px;
   color: #FBFBFB;
   text-align: left;
-  padding:5px 0px;
+  padding:5px 20px;
 `;
 const TeamDetailsInTh = styled.th`
   flex: 1;
@@ -103,12 +103,14 @@ const TeamDetailsInTh = styled.th`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  // justify-content: space-around;
   font-size: 14px;
+  text-align:left;
   font-weight: 400;
   line-height: 17px;
+  padding:0px 20px;
+
   color: #959595;
-  text-align: left;
   background-color: #272727;
 `;
 
@@ -123,6 +125,8 @@ width: 100%;
 height:40px;
 display: flex;
 flex-direction:row;
+
+
 `;
 const TeamDetailsTitle = styled.h1`
 font-size: 16px;
@@ -131,7 +135,7 @@ line-height: 19px;
 `;
 
 const PlayerIGNNAme = styled.p`
-  text-align: center;
+  text-align: left;
   padding:2px;
 `;
 

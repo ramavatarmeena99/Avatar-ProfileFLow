@@ -14,6 +14,7 @@ export default function EditProfilePage() {
   const [instagram, setInstagram] = useState("");
   const [discord, setDiscord] = useState("");
   const [facebook, setFacebook] = useState("");
+  const [alertMessege, setAlertMessege] = useState(null);
 
 
 
@@ -27,8 +28,13 @@ export default function EditProfilePage() {
 
   const updateUserProfile = async () => {
     if(!userName){
-      alert("user Name requred")
-      return
+      setAlertMessege(true);
+      setTimeout(() => {
+        setAlertMessege(false);
+      }, 2000);
+      return () => {
+        clearTimeout(setAlertMessege);
+      };
     }
 
     const data = {
@@ -113,6 +119,8 @@ export default function EditProfilePage() {
         value={userName}
         onChange={(e) => setUserName(e.target.value)}
         type="text" placeholder="Enter UserName"></UserNameInput>
+                          {alertMessege ? <UserNameAlertMessege>*User Name Required*</UserNameAlertMessege> : null}
+
       </ForUserDetailsEdit>
       <ForUserDetailsEdit>
         <UserName>Email Address</UserName>
@@ -271,4 +279,12 @@ const ForEditProfileTitle = styled.p`
   font-size: 14px;
   line-height: 17px;
   padding-top: 10px;
+`;
+
+const UserNameAlertMessege = styled.p`
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 19px;
+  padding: 10px 0px;
+  color: red;
 `;

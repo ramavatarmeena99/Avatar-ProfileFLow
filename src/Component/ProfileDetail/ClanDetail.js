@@ -9,7 +9,6 @@ export default function ClanDetail() {
   const { id } = useParams();
 
   const getClanDetails = async () => {
-
     const endpoint = `api/v1/esport/clan/myclan?user_id=${id}`;
     const res = await api2("get", {}, endpoint);
 
@@ -27,13 +26,11 @@ export default function ClanDetail() {
   }, []);
   return (
     <>
-      <TeamIGnDetailTitle>Clan</TeamIGnDetailTitle>
+      <ClanDetailTitle>Clan</ClanDetailTitle>
 
       <ForClan>
         <ForClanImg>
-          <ClanImage src={clanData?.clan_image}>
-
-          </ClanImage>
+          <ClanImage src={clanData?.clan_image}></ClanImage>
         </ForClanImg>
         <ClanTitleDiv>
           <ClanTitle>{clanData?.title}</ClanTitle>
@@ -47,7 +44,7 @@ export default function ClanDetail() {
           </ShareIconForClan>
           <Group>
             <MdGroups />
-{clanData?.memberCount}
+            {clanData?.memberCount}
           </Group>
         </ForShareOrGroupIcons>
       </ForClan>
@@ -62,7 +59,7 @@ const ForClan = styled.div`
   border-radius: 5px;
   display: flex;
   flex-direction: row;
-  margin-top: 20px;
+  margin-top: 10px;
 `;
 const ForClanImg = styled.div`
   display: flex;
@@ -124,8 +121,9 @@ const Group = styled.div`
   position: relative;
 `;
 
-const TeamIGnDetailTitle = styled.h1`
-  padding: 10px 10px;
+const ClanDetailTitle = styled.h1`
+  padding-left: 5px;
+  padding-top: 10px;
   font-size: 16px;
   line-height: 19px;
 `;
