@@ -17,7 +17,7 @@ export default function IGNDetails() {
     const endpoint = `api/v1/esport/esport_game_contest/getIgnDetails?id=${id}`;
     const res = await api2("get", {}, endpoint);
 
-    console.log(res.data.results);
+    // console.log(res.data.results);
 
     if (res.data.results) {
       setAllIgnDetails(res.data.results);
@@ -65,9 +65,9 @@ export default function IGNDetails() {
         <IGNDetailsTable>
           <tbody>
             <IgnDetailsInTr>
-              <IgnDetailsInTh>Game</IgnDetailsInTh>
+              <GameIgnDetailsInTh>Game</GameIgnDetailsInTh>
               <IgnDetailsInTh>IGN</IgnDetailsInTh>
-              <IgnDetailsInTh></IgnDetailsInTh>
+              <EmptyIgnDetailsInTh></EmptyIgnDetailsInTh>
             </IgnDetailsInTr>
 
             {allIgnDetails.map((item, index) => {
@@ -84,7 +84,11 @@ export default function IGNDetails() {
                   <IGNDetailsForTd>
                     {getGameName(item?.game_master_id)}
                   </IGNDetailsForTd>
-                  <IGNDetailsForTd>{item?.ign_name}</IGNDetailsForTd>
+                  <IGNDetailsForTd>
+                  {item?.ign_name?.length > 10
+          ? item?.ign_name?.slice(0, 10) + "..."
+          : item?.ign_name}
+                  </IGNDetailsForTd>
                   <IGNDetailsEditForTd
                    
                   >
@@ -160,14 +164,10 @@ const IGN = styled.div`
   margin-bottom: 10px;
 `;
 const IGNDetailsTable = styled.table`
-  //   display: flex;
-  //   flex-direction: column;
-  //   align-items:center;
-  //   justify-content:center;
-  //   color: white;
-  border-radius: 5px;
+  border-radius: 10px;
   background-color: #161616;
-  border: none;
+  border-collapse: collapse;
+
 `;
 const IGNDetailsForTd = styled.td`
   flex: 1;
@@ -176,7 +176,6 @@ const IGNDetailsForTd = styled.td`
   flex-direction: row;
   align-items: center;
   padding:5px 20px;
-
   font-size: 14px;
   font-weight: 400;
   line-height: 17px;
@@ -197,7 +196,7 @@ const IGNDetailsEditForTd = styled.td`
   color: #e1012d;
   text-align: left;
   padding:0px 20px;
-
+  
 `;
 const IgnDetailsInTh = styled.th`
   flex: 1;
@@ -212,13 +211,53 @@ const IgnDetailsInTh = styled.th`
   color: #959595;
   text-align: left;
   background-color: #272727;
+
 `;
+const GameIgnDetailsInTh = styled.th`
+  flex: 1;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  // justify-content: space-around;
+  font-size: 14px;
+  text-align: left;
+  font-weight: 400;
+  line-height: 17px;
+  padding: 0px 20px;
+  color: #959595;
+  background-color: #272727;
+  border-top-left-radius: 5px;
+
+  `;
+
+
+const EmptyIgnDetailsInTh = styled.th`
+  flex: 1;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  // justify-content: space-around;
+  font-size: 14px;
+  text-align: left;
+  font-weight: 400;
+  line-height: 17px;
+  padding: 0px 20px;
+  color: #959595;
+  background-color: #272727;
+  border-top-right-radius: 5px;
+
+`;
+
 
 const IgnDetailsInTr = styled.tr`
   width: 100%;
   height: 40px;
   display: flex;
   flex-direction: row;
+  
+
 `;
 const TeamIGnDetailTitle = styled.h1`
   padding: 10px 10px;

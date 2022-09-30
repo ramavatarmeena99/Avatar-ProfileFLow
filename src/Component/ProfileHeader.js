@@ -41,7 +41,7 @@ const ProfileTab = styled.div`
   align-items: center;
   justify-content: space-between;
   color: white;
-  padding: 0px 10px;
+  padding: 0px 0px;
   background-color: #272727;
 `;
 

@@ -40,6 +40,7 @@ export default function HeaderForProps({
           style={{
             color: "white",
             fontSize: "20px",
+            paddingRight:"0px",
           }}
           aria-controls="simple-menu"
           aria-haspopup="true"
@@ -55,6 +56,7 @@ export default function HeaderForProps({
             color: "#50A3FF",
             fontSize: "16px",
             border: "none",
+            paddingRight:"15px"
           }}
         >
           {SaveButton}
@@ -83,11 +85,13 @@ const ProfileTab = styled.div`
   align-items: center;
   justify-content: space-between;
   color: white;
-  padding: 0px 10px;
+  padding: 0px 0px;
   background-color: #272727;
 `;
 const BackButton = styled.p`
   font-size: 20px;
+  padding-left:15px;
+
 `;
 const ProfileFLowTitle = styled.p`
   font-size: 16px;

@@ -14,7 +14,7 @@ export default function FollowersOrFollowingPage() {
     let endpoint = `api/v1/esport/followers?user_id=${id}&flag=${type}`;
     const res = await api2("get", {}, endpoint);
 
-    console.log(res.data);
+    // console.log(res.data);
    
     if (res.data.success) {
     setIsLoading(false)
