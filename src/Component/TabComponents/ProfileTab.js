@@ -40,12 +40,15 @@ export default function ProfileTab() {
           textColor="inherit"
           centered
         >
+        {+myUserId === +id &&
           <Tab label="ABOUT " />
+        
+        }
+
           <Tab label="REELS " />
           <Tab label="MARKETPLACE " />
         </Tabs>
-
-        {value === 0 && <AboutTab />}
+        {value === 0 && +myUserId === +id && <AboutTab />}
         {value === 1 && <ReelsTab />}
         {value === 2 && <MarketPlaceTab />}
       </Paper>

@@ -149,9 +149,16 @@ export default function ProfileDetails() {
                   color: "#3389E9",
                 }}
               >
-                <p style={{ transform: "skew(6deg)",    fontWeight: "400",
+                <p
+                  style={{
+                    transform: "skew(6deg)",
+                    fontWeight: "400",
                     fontSize: "16px",
-                    lineHeight: "19px", }}>MESSEGE</p>
+                    lineHeight: "19px",
+                  }}
+                >
+                  MESSEGE
+                </p>
               </div>
             </div>
           )}
@@ -206,35 +213,38 @@ export default function ProfileDetails() {
           ></AllSocialMediaIcons>
         </div>
       </ForSocialMediaIcons>
-      <ForWin>
-        <Join>
-          <JoinHostOrEarningIcons
-            src={Joined}
-            alt="Joined "
-          ></JoinHostOrEarningIcons>
-          <TotalJoin>{detail?.total_tournament_played} Joined</TotalJoin>
-        </Join>
-        <Host>
-          <JoinHostOrEarningIcons
-            src={Hosted}
-            alt="Hosted "
-          ></JoinHostOrEarningIcons>
-          <TotalHosted>{detail?.total_tournament_hosted} Hosted</TotalHosted>
-        </Host>
-        <Earning>
-          <JoinHostOrEarningIcons
-            src={Earnings}
-            alt="earnings "
-          ></JoinHostOrEarningIcons>
-          <TotalEarning>
-            ₹ {detail?.total_prize_money / 100} Earning
-          </TotalEarning>
-        </Earning>
+      {+myUserId === +id && (
+        <ForWin>
+          <Join>
+            <JoinHostOrEarningIcons
+              src={Joined}
+              alt="Joined "
+            ></JoinHostOrEarningIcons>
+            <TotalJoin>{detail?.total_tournament_played} Joined</TotalJoin>
+          </Join>
+          <Host>
+            <JoinHostOrEarningIcons
+              src={Hosted}
+              alt="Hosted "
+            ></JoinHostOrEarningIcons>
+            <TotalHosted>{detail?.total_tournament_hosted} Hosted</TotalHosted>
+          </Host>
+          <Earning>
+            <JoinHostOrEarningIcons
+              src={Earnings}
+              alt="earnings "
+            ></JoinHostOrEarningIcons>
+            <TotalEarning>
+              ₹ {detail?.total_prize_money / 100} Earning
+            </TotalEarning>
+          </Earning>
 
-        <ShareIcon>
-          <BiShareAlt />
-        </ShareIcon>
-      </ForWin>
+          <ShareIcon>
+            <BiShareAlt />
+          </ShareIcon>
+        </ForWin>
+      )}
+
       <ClanDetail />
     </ForProfileDetails>
   );
