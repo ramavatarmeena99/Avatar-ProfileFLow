@@ -140,7 +140,7 @@ export default function ProfileDetails() {
                 style={{
                   width: "120px",
                   height: "40px",
-                  backgroundColor: "#3389E9",
+                  // backgroundColor: "#3389E9",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
